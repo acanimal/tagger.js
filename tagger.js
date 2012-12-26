@@ -224,7 +224,7 @@
                 // separator char and add the new tag if valid
                 tag = tag.replace(new RegExp(this.options.fieldSeparator, 'g'), '');
                 if (tag != "" && !this._isDuplicatedTag(tag)) {
-                    this._addTag(tag);
+                    this.tags(tag);
                     this.inputElement.val('');
                 } else {
                     this.inputElement.val(tag);
