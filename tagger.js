@@ -121,14 +121,22 @@
             this.inputElement.off('.' + pluginName);
             this.form.off('.' + pluginName, "button");
 
-            // Remove any existent tag
+            // Unbind events for tags
+            var $tag;
             for (var t in this.tagList) {
-                this.clear();
+                $tag = this.tagList[t];
+                $tag.off('.' + pluginName);
+                $tag.find('i.icon-remove').off('.' + pluginName);
             }
+            
+            // Remove any existent tag
+            this.clear();
 
             // Remove the plugin root
             this.tagger.remove();
 
+            // Remove data
+            this.$el.removeData();
         },
         //
         // Clear the current tag list
@@ -256,6 +264,11 @@
                     $tag = $('<span class="label">' + tag + '</span>');
                 } else {
                     $tag = $('<span class="label">' + tag + '<i class="icon-remove"></i></span>');
+                    // Bind event to the label
+                    $tag.on('click.' + pluginName, $.proxy(function(event){
+                        // Call the callback
+                        this.options.onClick.call(this, tag);
+                    }, this));
                     // Bind event to the close icon
                     $tag.find('i.icon-remove').on('click.' + pluginName, $.proxy(function(event) {
                         this.remove(tag);
@@ -338,6 +351,9 @@
         // Callback invoked when user calls the 'clear' method. 
         // Note: Internally the 'clear' method uses the 'remove'.
         onClear: function() {
+        },
+        // Callback invoked when the user click a tag label
+        onClick: function() {
         }
     };
 

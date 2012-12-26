@@ -6,10 +6,10 @@
 }
 .tagger .label {
     margin-right: 3px;
+    cursor: pointer;
 }
 .tagger .label i.icon-remove {
     margin-left: 3px;
-    cursor: pointer;
 }
 
 .tagger-tag-list {
