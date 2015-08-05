@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>tagger demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Antonio Santiago">
+    <meta name="descriptions" content="Test for the tagger jQuery plugin">
+    <meta name="keywords" content="jQuery, tagger, Twitter Bootstrap" />
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/prettify.css" type="text/css" rel="stylesheet" />
+    <link href="css/sunburst.css" type="text/css" rel="stylesheet" />
+    <link href="css/tagger.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 800px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body onload="prettyPrint();">
+
+    <div class="container-narrow">
+
+      <div class="jumbotron">
+        <h1>tagger Plugin</h1>
+        <p class="lead">A jQuery plugin for the Twitter Bootstrap framework to manage tags. </p>
+        <p class="alert alert-success">More information about the tagger plugin can be found at 
+          <a href="http://acuriousanimal.com/blog/2012/12/26/tagger-a-jquery-plugin-to-manage-tags/">A Curious Animal</a> blog site.
+        </p>
+        <iframe src="http://ghbtns.com/github-btn.html?user=acanimal&repo=tagger.js&type=fork"
+  allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="acanimal">Tweet</a>
+        <a href="https://twitter.com/acanimal" class="twitter-follow-button" data-show-count="false">Follow @acanimal</a>
+      </div>
+
+      <div class="row-fluid marketing">
+        <div class="span12">
+          <hr/>
+          <h3>Dependencies</h3>
+          <p>
+            tagger is a jQuery plugin that makes use of some Twitter Bootstrap 
+            framework components so. Because of this you need to include the 
+            Bootstrap CSS file in your web page followed by the <code>tagger.css</code> file:
+
+<pre class="prettyprint">&lt;link href="css/bootstrap.min.css" rel="stylesheet" media="screen"&gt;
+&lt;link href="css/tagger.css" rel="stylesheet" media="screen"&gt;</pre>
+
+          in addition to the jQuery library plus the <code>tagger.js</code> file:
+
+<pre class="prettyprint">&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/tagger.js"&gt;&lt;/script&gt;</pre>
+
+          </p>
+
+          <h3>Using <em>tagger</em></h3>
+          <p>
+            As any other jQuery plugin make an element selection and apply the tagger plugin:
+          </p>
+
+          <pre class="prettyprint">$(some_selection).tagger();</pre>    
+
+          <p>tagger works on any element with a value attribute, typically an 
+            <code>input</code> element. Given next HTML element:<br/>
+
+          <pre class="prettyprint">&lt;input id="input1" value="some, tags, here" /&gt;</pre>
+          
+          and the next JavaScript sentence:<br/>
+
+          <pre class="prettyprint">$('#myInput').tagger();</pre>
+
+          this produces the next output:
+
+          <input id="input1" value="some, tags, here" />
+
+          <h3>Working in <code>readOnly</code> mode</h3>
+          <p>You can force tagger to  work in read only mode, that is, simply beautify
+           the set of tags specified in the <code>input</code> element by setting
+           the <code>readOnly</code>  property to <code>true</code> :
+          </p>
+
+          <pre class="prettyprint">&lt;input input="inputReadOnly" value="some, tags, here, working, in, readOnly, mode" /&gt;</pre>
+          <pre class="prettyprint">$('#inputReadOnly').tagger({
+  readOnly: true
+});</pre>
+
+          <input id="inputReadOnly" value="some, tags, here, working, in, readOnly, mode" />
+         
+          <h3>Change the field separator</h3>
+          <p>By default tagger uses the <code>,</code> as the filed delimiter between tags.
+            You can change this using the <code>fieldSeparator</code> property:</p>
+
+          <pre class="prettyprint">&lt;input input="inputReadOnlyAndFieldSeparator" value="some | tags | here | working | in | readOnly | mode | with a | different | field separator " /&gt;</pre>
+                    <pre class="prettyprint">$('#inputReadOnly').tagger({
+  readOnly: true,
+  fieldSeparator: '|'
+});</pre>
+
+          <input id="inputReadOnlyAndFieldSeparator" value="some | tags | here | working | in | readOnly | mode | with a | different | field separator " />
+
+          <h3>Methods</h3>
+
+          <p>tagger offers three methods to work with our tags:
+
+            <ul>
+              <li>
+                <code>tags</code>: to add one or more tags
+              </li>
+              <li>
+                <code>remove</code>: to remove one or more tags
+              </li>
+              <li>
+                <code>clear</code>: to clean our tag list
+              </li>
+           </ul>
+
+           So, given an input element initialized with tagger we can make add three new tags like:
+           <pre class="prettyprint">$('#myInput').tagger('tags', 'some, more, tags');</pre>
+           <div class="alert alert-info">
+              Duplicated tags are ignored
+           </div>
+
+           remove tags using:
+           <pre class="prettyprint">$('#myInput').tagger('remove', 'more, tags');</pre>
+           <div class="alert alert-info">
+              If the tag doesn't exist nothing happens
+           </div>
+            
+           or clearing all exisiting tags with:
+           <pre class="prettyprint">$('#myInput').tagger('remove', 'more, tags');</pre>
+           <div class="alert alert-info">
+              The <code>clear</code> method uses internally the <code>remove</code>
+           </div>
+
+           In addition you can get all the existent tags invoking the <code>tags</code>
+           method wihout parameters:
+           <pre class="prettyprint">$('#myInput').tagger('tags');</pre>
+
+          </p>
+
+          <h3>Callbacks</h3>
+
+          <p>
+            tagger allows to register different callbacks to know what is happening.
+            They are:
+
+            <ul>
+              <li>
+                <code>onTagsAdded</code>: invoked after the <code>tags</code> method is called
+              </li>
+              <li>
+                <code>onTagsRemoved</code>: invoked after the <code>remove</code> method is called
+              </li>
+              <li>
+                <code>onClear</code>: invoked after the <code>clear</code> method is called
+              </li>
+              <li>
+                <code>onClick</code>: invoked when a tag label is clicked
+              </li>
+           </ul>
+
+           Next tagger has been initialized registering the previous callbacks. 
+           Make changes on the list and see what is happening:
+
+           <input id="input2" value="open, console, and, play, with,tags" />
+        </p>
+        
+           <textarea id="output" cols="40" rows="10" style="width:400px"></textarea>
+          
+        </div>
+
+      </div>
+
+    </div> <!-- /container -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="js/prettify.js"></script>
+    <script type="text/javascript" src="js/tagger.js"></script>
+
+    <script>
+            $(document).ready(function() {
+              $('#input1').tagger();
+              $('#inputReadOnly').tagger({
+                readOnly: true
+              });
+              $('#inputReadOnlyAndFieldSeparator').tagger({
+                readOnly: true,
+                fieldSeparator: '|'
+              });
+              $('#input2').tagger({
+                onTagsAdded: function(tags) {
+                  var text = $('#output').val();
+                  $('#output').val(text+'Added: '+tags+'\n');
+                },
+                onTagsRemoved: function(tags) {
+                  var text = $('#output').val();
+                  $('#output').val(text+'Removed: '+tags+'\n');
+                },
+                onClear: function() {
+                  var text = $('#output').val();
+                  $('#output').val(text+'Cleared !!!'+'\n');
+                },
+                onClick: function(tag) {
+                  var text = $('#output').val();
+                  $('#output').val(text+'Clicked: '+tag+'\n');
+                }
+              });
+            });
+    </script>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-8297669-6']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>
